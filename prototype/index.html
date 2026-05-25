@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas DriveEd Builder | TDLR-Compliant Online Driver Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #0F172A;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .nav-active {
+            color: #0F172A;
+            font-weight: 600;
+        }
+
+        .module-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .texas-orange {
+            color: #F97316;
+        }
+
+        .compliance-badge {
+            background: linear-gradient(90deg, #166534, #4ade80);
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+
+        .lesson-item {
+            transition: background-color 0.2s;
+        }
+        
+        .lesson-item:hover {
+            background-color: #f8fafc;
+        }
+
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+
+        .demo-video-placeholder {
+            background: linear-gradient(135deg, #1e2937 0%, #0f172a 100%);
+            position: relative;
+        }
+
+        .demo-video-placeholder::after {
+            content: '\f04b';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: rgba(255,255,255,0.9);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+    <!-- Top Bar -->
+    <div class="bg-slate-900 text-white py-2 text-sm">
+        <div class="max-w-screen-xl mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="flex items-center gap-x-2">
+                    <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+                    <span class="font-semibold text-sm">TDLR Approved Provider</span>
+                </div>
+                <div class="hidden md:block text-slate-400">|</div>
+                <div class="hidden md:flex items-center gap-x-1.5 text-xs">
+                    <span>Course #XXXX (Pending Approval)</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-x-4 text-xs">
+                <a href="#" class="hover:text-emerald-400 transition-colors">For Driving Schools</a>
+                <a href="#" class="hover:text-emerald-400 transition-colors">Parent Resources</a>
+                <div class="bg-white/10 px-3 py-1 rounded-full text-xs flex items-center gap-x-1">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>EN | ES</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-x-3">
+                    <div class="flex items-center gap-x-2">
+                        <div class="w-9 h-9 bg-orange-500 rounded-xl flex items-center justify-center">
+                            <i class="fa-solid fa-car text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="heading-font text-2xl font-semibold tracking-tighter">Texas</span>
+                            <span class="heading-font text-2xl font-semibold tracking-tighter text-orange-500">DriveEd</span>
+                        </div>
+                    </div>
+                    <div class="hidden md:block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold rounded-full">COMPLIANT • LEGAL • REAL</div>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="#courses" class="hover:text-orange-600 transition-colors">Courses</a>
+                    <a href="#how-it-works" class="hover:text-orange-600 transition-colors">How it Works</a>
+                    <a href="#builder" class="hover:text-orange-600 transition-colors">Course Builder</a>
+                    <a href="#compliance" class="hover:text-orange-600 transition-colors">Compliance</a>
+                </div>
+
+                <div class="flex items-center gap-x-3">
+                    <button onclick="showLoginModal()"
+                            class="px-4 py-2 text-sm font-semibold hover:bg-slate-100 rounded-xl transition-colors">
+                        Log in
+                    </button>
+                    <button onclick="startFreeTrial()"
+                            class="px-5 py-2.5 bg-slate-900 hover:bg-black text-white text-sm font-semibold rounded-2xl transition-all active:scale-[0.985]">
+                        Start Free Trial
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="max-w-screen-xl mx-auto px-6 pt-16 pb-12">
+        <div class="grid md:grid-cols-12 gap-10 items-center">
+            <div class="md:col-span-7">
+                <div class="inline-flex items-center gap-x-2 bg-white shadow-sm border border-slate-200 rounded-3xl px-4 py-1.5 mb-6">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                    <span class="text-sm font-semibold text-slate-700">Now accepting applications for 2026 TDLR approval</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-6xl leading-[1.05] tracking-tighter font-semibold heading-font">
+                    The modern platform for<br>
+                    <span class="text-orange-500">legal Texas driver education.</span>
+                </h1>
+                
+                <p class="mt-6 max-w-lg text-xl text-slate-600">
+                    Build, deliver, and manage 100% TDLR-compliant online driver's ed courses. 
+                    Start with Texas. Issue real certificates. Scale to other states.
+                </p>
+                
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <button onclick="startFreeTrial()"
+                            class="px-8 py-4 bg-orange-500 hover:bg-orange-600 transition-all text-white font-semibold rounded-3xl text-lg flex items-center gap-x-3 shadow-lg shadow-orange-500/30 active:scale-[0.985]">
+                        <span>Get Started — Build Your First Course</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    
+                    <button onclick="document.getElementById('demo-video').scrollIntoView({ behavior: 'smooth' })"
+                            class="px-7 py-4 border border-slate-300 hover:bg-white font-semibold rounded-3xl text-lg flex items-center gap-x-3 transition-all">
+                        <i class="fa-solid fa-play mr-1"></i>
+                        <span>Watch 2-min Demo</span>
+                    </button>
+                </div>
+                
+                <div class="mt-8 flex items-center gap-x-6 text-sm">
+                    <div class="flex -space-x-2">
+                        <div class="w-8 h-8 bg-slate-300 border border-white rounded-full overflow-hidden"><img src="https://i.pravatar.cc/32?img=28" alt=""></div>
+                        <div class="w-8 h-8 bg-slate-300 border border-white rounded-full overflow-hidden"><img src="https://i.pravatar.cc/32?img=47" alt=""></div>
+                        <div class="w-8 h-8 bg-slate-300 border border-white rounded-full overflow-hidden"><img src="https://i.pravatar.cc/32?img=12" alt=""></div>
+                    </div>
+                    <div class="text-slate-600">
+                        <span class="font-semibold text-slate-900">1,284</span> students trained this month
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-5">
+                <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-2">
+                    <div class="bg-slate-900 rounded-[20px] p-6 text-white">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <div class="text-emerald-400 text-xs tracking-[2px] font-mono">LIVE • COMPLIANT</div>
+                                <div class="text-3xl font-semibold mt-1 tracking-tight">Texas Teen Driver Ed</div>
+                                <div class="text-slate-400 mt-1">32-hour POI-DE aligned course</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-4xl font-semibold tabular-nums">$89</div>
+                                <div class="text-xs text-slate-400 -mt-1">per student</div>
+                            </div>
+                        </div>
+                        
+                        <div class="my-6 h-px bg-white/10"></div>
+                        
+                        <div class="grid grid-cols-3 gap-4 text-center text-sm">
+                            <div>
+                                <div class="font-mono text-emerald-400 text-xl font-semibold">32</div>
+                                <div class="text-xs text-slate-400">Classroom Hours</div>
+                            </div>
+                            <div>
+                                <div class="font-mono text-emerald-400 text-xl font-semibold">12</div>
+                                <div class="text-xs text-slate-400">Interactive Modules</div>
+                            </div>
+                            <div>
+                                <div class="font-mono text-emerald-400 text-xl font-semibold">98%</div>
+                                <div class="text-xs text-slate-400">Pass Rate</div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="enrollNow()"
+                                class="mt-6 w-full py-3.5 bg-white text-slate-900 font-semibold rounded-2xl flex items-center justify-center gap-x-2 hover:bg-orange-50 active:bg-orange-100 transition-colors">
+                            <span>Enroll Student or Start Free Trial</span>
+                        </button>
+                        
+                        <div class="text-center mt-3 text-[10px] text-slate-400">Includes DE-964 certificate upon completion • TDLR reporting ready</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trust Bar -->
+    <div class="border-y border-slate-200 bg-white py-5">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center md:justify-between items-center gap-x-8 gap-y-4 opacity-75 text-sm font-medium">
+                <div class="flex items-center gap-x-2"><i class="fa-solid fa-check-double text-emerald-500"></i> <span>TDLR Course Standards</span></div>
+                <div class="flex items-center gap-x-2"><i class="fa-solid fa-check-double text-emerald-500"></i> <span>Electronic Reporting Ready</span></div>
+                <div class="flex items-center gap-x-2"><i class="fa-solid fa-check-double text-emerald-500"></i> <span>Work Zone Safety Included</span></div>
+                <div class="flex items-center gap-x-2"><i class="fa-solid fa-check-double text-emerald-500"></i> <span>Parent-Taught Compatible</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses Section -->
+    <div id="courses" class="max-w-screen-xl mx-auto px-6 py-16">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <div class="uppercase tracking-[1.5px] text-xs font-bold text-orange-500">START HERE</div>
+                <h2 class="text-4xl heading-font font-semibold tracking-tighter">Choose Your Course</h2>
+            </div>
+            <a href="#" class="hidden md:flex items-center text-sm font-semibold text-orange-600 hover:text-orange-700">View all courses <i class="fa-solid fa-chevron-right ml-1.5 text-xs"></i></a>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Teen Course Card -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 module-card flex flex-col">
+                <div class="flex justify-between">
+                    <div>
+                        <span class="px-3 py-1 text-xs font-bold bg-orange-100 text-orange-600 rounded-full">TEEN • 14-17</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-mono text-3xl font-semibold">$89</span>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="font-semibold text-2xl tracking-tight">Texas Teen Driver Education</div>
+                    <div class="text-slate-500 mt-1">Full 32-hour POI-DE aligned course</div>
+                </div>
+                
+                <div class="mt-auto pt-6">
+                    <div class="flex items-center gap-x-4 text-xs">
+                        <div class="flex-1">
+                            <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-1.5 w-[85%] bg-emerald-500 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="font-mono text-emerald-600 text-xs font-bold">32 hrs</div>
+                    </div>
+                    
+                    <ul class="mt-5 space-y-2.5 text-sm">
+                        <li class="flex items-start gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5 fa-fw"></i> <span>Module 1 for immediate permit eligibility</span></li>
+                        <li class="flex items-start gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5 fa-fw"></i> <span>Full DE-964 certificate + TDLR reporting</span></li>
+                        <li class="flex items-start gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5 fa-fw"></i> <span>Parent dashboard &amp; BTW log tools</span></li>
+                        <li class="flex items-start gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5 fa-fw"></i> <span>Construction zone safety module</span></li>
+                    </ul>
+                    
+                    <button onclick="enrollNow('teen')" 
+                            class="mt-6 w-full py-3.5 text-sm font-semibold bg-slate-900 hover:bg-black transition-colors text-white rounded-2xl">Enroll Now or Start Trial</button>
+                </div>
+            </div>
+            
+            <!-- Adult Course Card -->
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 module-card flex flex-col">
+                <div class="flex justify-between">
+                    <div>
+                        <span class="px-3 py-1 text-xs font-bold bg-blue-100 text-blue-600 rounded-full">ADULT • 18-24</span>
+                    </div>
+                    <div class="text-right">
+                        <span class="font-mono text-3xl font-semibold">$49</span>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <div class="font-semibold text-2xl tracking-tight">Texas Adult Driver Education</div>
+                    <div class="text-slate-500 mt-1">6-hour POI-Adult Six-Hour course</div>
+                </div>
+                
+                <div class="mt-auto pt-6">
+                    <div class="flex items-center gap-x-4 text-xs">
+                        <div class="flex-1">
+                            <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-1.5 w-full bg-blue-500 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="font-mono text-blue-600 text-xs font-bold">6 hrs</div>
+                    </div>
+                    
+                    <ul class="mt-5 space-y-2.5 text-sm">
+                        <li class="flex items-start gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5 fa-fw"></i> <span>Fast-track to first Texas license</span></li>
+                        <li class="flex items-start gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5 fa-fw"></i> <span>ADE-1317 certificate included</span></li>
+                        <li class="flex items-start gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5 fa-fw"></i> <span>Skip DPS written test option</span></li>
+                        <li class="flex items-start gap-x-2.5"><i class="fa-solid fa-check text-emerald-500 mt-0.5 fa-fw"></i> <span>Work zone + defensive driving focus</span></li>
+                    </ul>
+                    
+                    <button onclick="enrollNow('adult')" 
+                            class="mt-6 w-full py-3.5 text-sm font-semibold border border-slate-300 hover:bg-slate-50 transition-colors rounded-2xl">Start 6-Hour Course</button>
+                </div>
+            </div>
+            
+            <!-- Course Builder Card -->
+            <div id="builder" class="bg-gradient-to-br from-slate-900 to-slate-800 text-white border border-slate-700 rounded-3xl p-6 module-card flex flex-col">
+                <div>
+                    <span class="px-3 py-1 text-xs font-bold bg-white/20 text-white rounded-full">FOR SCHOOLS &amp; PROVIDERS</span>
+                </div>
+                <div class="mt-4">
+                    <div class="font-semibold text-2xl tracking-tight">Course Builder Pro</div>
+                    <div class="text-slate-300 mt-1">White-label compliant course platform</div>
+                </div>
+                
+                <div class="mt-auto pt-6 text-sm">
+                    <div class="space-y-3 text-slate-300">
+                        <div class="flex gap-x-3"><i class="fa-solid fa-check-double w-4 mt-0.5 text-emerald-400"></i> <span>Drag &amp; drop lesson builder</span></div>
+                        <div class="flex gap-x-3"><i class="fa-solid fa-check-double w-4 mt-0.5 text-emerald-400"></i> <span>Pre-loaded POI-DE templates</span></div>
+                        <div class="flex gap-x-3"><i class="fa-solid fa-check-double w-4 mt-0.5 text-emerald-400"></i> <span>Auto time-tracking &amp; compliance checks</span></div>
+                        <div class="flex gap-x-3"><i class="fa-solid fa-check-double w-4 mt-0.5 text-emerald-400"></i> <span>Multi-school branding &amp; reporting</span></div>
+                    </div>
+                    
+                    <button onclick="showBuilderModal()"
+                            class="mt-6 w-full py-3.5 text-sm font-semibold bg-white text-slate-900 hover:bg-orange-50 transition-colors rounded-2xl">Request Demo &amp; Pricing</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How it Works -->
+    <div id="how-it-works" class="bg-white border-y border-slate-100 py-16">
+        <div class="max-w-screen-xl mx-auto px-6">
+            <div class="max-w-2xl">
+                <div class="uppercase tracking-widest text-xs font-bold text-orange-500">SIMPLE YET POWERFUL</div>
+                <h3 class="text-4xl heading-font font-semibold tracking-tighter mt-2">How Texas DriveEd works for real students</h3>
+            </div>
+            
+            <div class="mt-10 grid md:grid-cols-4 gap-6">
+                <div class="flex gap-x-4">
+                    <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-orange-100 flex items-center justify-center text-orange-500 font-mono font-bold">1</div>
+                    <div>
+                        <div class="font-semibold">Student enrolls</div>
+                        <div class="text-sm text-slate-600 mt-1">Parent or school purchases access. Student creates account with ID verification.</div>
+                    </div>
+                </div>
+                <div class="flex gap-x-4">
+                    <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-orange-100 flex items-center justify-center text-orange-500 font-mono font-bold">2</div>
+                    <div>
+                        <div class="font-semibold">Complete Module 1</div>
+                        <div class="text-sm text-slate-600 mt-1">~6 hours of Traffic Laws. Pass quiz → Get partial DE-964 for DPS learner permit.</div>
+                    </div>
+                </div>
+                <div class="flex gap-x-4">
+                    <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-orange-100 flex items-center justify-center text-orange-500 font-mono font-bold">3</div>
+                    <div>
+                        <div class="font-semibold">Finish full course</div>
+                        <div class="text-sm text-slate-600 mt-1">All 12 modules + final exam. Time-tracked for compliance. Receive full certificate.</div>
+                    </div>
+                </div>
+                <div class="flex gap-x-4">
+                    <div class="w-9 h-9 flex-shrink-0 rounded-2xl bg-orange-100 flex items-center justify-center text-orange-500 font-mono font-bold">4</div>
+                    <div>
+                        <div class="font-semibold">Go to DPS + Drive</div>
+                        <div class="text-sm text-slate-600 mt-1">Use certificate + PTDE Guide (if parent-taught) for permit, practice, and road test.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Video / Interactive Preview -->
+    <div id="demo-video" class="max-w-screen-xl mx-auto px-6 py-16">
+        <div class="grid md:grid-cols-12 gap-x-10 items-center">
+            <div class="md:col-span-5">
+                <div class="uppercase text-xs tracking-[2px] font-bold text-orange-500">INTERACTIVE PREVIEW</div>
+                <h3 class="text-4xl heading-font font-semibold tracking-tighter mt-3">See Module 1 in action</h3>
+                <p class="mt-4 text-slate-600">This is a live demo of how lessons look and feel. Real courses include video, interactive quizzes, and strict time tracking to meet TDLR hour requirements.</p>
+                
+                <div class="mt-6 flex items-center gap-x-3 text-sm">
+                    <div class="px-4 py-2 bg-white border border-slate-200 rounded-2xl flex items-center gap-x-2 text-xs font-medium">
+                        <i class="fa-solid fa-clock text-emerald-500"></i>
+                        <span>Enforced 6-hour minimum</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:col-span-7 mt-8 md:mt-0">
+                <div class="bg-white border border-slate-200 shadow-xl rounded-3xl overflow-hidden">
+                    <!-- Demo Lesson Player -->
+                    <div class="px-6 pt-6 pb-4 bg-slate-900 text-white flex items-center justify-between">
+                        <div>
+                            <div class="text-xs opacity-60">MODULE 1 • LESSON 3</div>
+                            <div class="font-semibold">Right-of-Way at Intersections</div>
+                        </div>
+                        <div class="text-xs px-3 py-1 bg-white/10 rounded-full font-mono">18:42 / 42:00</div>
+                    </div>
+                    
+                    <div class="demo-video-placeholder aspect-video flex items-center justify-center cursor-pointer" onclick="simulateVideoPlay(this)">
+                        <div class="text-center text-white">
+                            <i class="fa-solid fa-play text-6xl mb-3 opacity-90"></i>
+                            <div class="text-sm font-medium tracking-wider">CLICK TO PLAY DEMO LESSON</div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-5 border-t">
+                        <div class="flex justify-between text-xs mb-3 font-medium text-slate-500">
+                            <div>PROGRESS</div>
+                            <div class="font-mono text-emerald-600">44% COMPLETE • 26 MIN REMAINING</div>
+                        </div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div class="progress-bar h-2 bg-emerald-500 rounded-full w-[44%]" style="width: 44%"></div>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
+                            <button onclick="completeLessonDemo()" 
+                                    class="py-2.5 border border-emerald-200 text-emerald-700 hover:bg-emerald-50 font-semibold rounded-2xl text-xs flex items-center justify-center gap-x-2">
+                                <i class="fa-solid fa-check-double"></i> 
+                                <span>MARK LESSON COMPLETE</span>
+                            </button>
+                            <button onclick="takeQuizDemo()"
+                                    class="py-2.5 bg-emerald-600 hover:bg-emerald-700 transition-colors text-white font-semibold rounded-2xl text-xs flex items-center justify-center gap-x-2">
+                                <span>TAKE KNOWLEDGE CHECK</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compliance Section -->
+    <div id="compliance" class="max-w-screen-xl mx-auto px-6 pb-20">
+        <div class="bg-slate-900 text-white rounded-3xl p-10 md:p-14">
+            <div class="max-w-3xl">
+                <div class="flex items-center gap-x-3">
+                    <i class="fa-solid fa-balance-scale text-3xl text-orange-400"></i>
+                    <div>
+                        <div class="uppercase tracking-[2px] text-xs font-bold text-orange-400">100% LEGAL PATH</div>
+                        <div class="text-3xl heading-font font-semibold tracking-tighter">Built for real licensing, not shortcuts.</div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-slate-300 max-w-prose">
+                    Every course delivered through Texas DriveEd is designed from the ground up to meet or exceed TDLR's Program of Organized Instruction (POI-DE). 
+                    We handle time tracking, student verification, certificate generation with control numbers, and prepare data for electronic submission to TDLR's system.
+                </div>
+                
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white/5 p-4 rounded-2xl">
+                        <div class="font-semibold flex items-center gap-x-2"><i class="fa-solid fa-file-contract"></i> <span>POI-DE Aligned</span></div>
+                        <div class="text-xs mt-2 text-slate-400">All 12 modules mapped to official objectives including new work zone requirements.</div>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-2xl">
+                        <div class="font-semibold flex items-center gap-x-2"><i class="fa-solid fa-database"></i> <span>Electronic Reporting</span></div>
+                        <div class="text-xs mt-2 text-slate-400">Ready for TDLR Online Licensing System uploads. Audit logs included.</div>
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-2xl">
+                        <div class="font-semibold flex items-center gap-x-2"><i class="fa-solid fa-user-shield"></i> <span>Identity &amp; Time Verified</span></div>
+                        <div class="text-xs mt-2 text-slate-400">Prevents rushing. Supports parent verification for PTDE programs.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer CTA -->
+    <div class="bg-orange-500 py-12">
+        <div class="max-w-screen-xl mx-auto px-6 text-center text-white">
+            <div class="max-w-md mx-auto">
+                <div class="text-3xl font-semibold tracking-tighter">Ready to launch your compliant driver ed service in Texas?</div>
+                <p class="mt-3 text-orange-100">Join the next generation of driver training providers.</p>
+                
+                <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+                    <button onclick="startFreeTrial()" 
+                            class="px-8 py-4 bg-white text-orange-600 font-semibold rounded-3xl hover:bg-orange-50 transition-colors">Start Building Today</button>
+                    <button onclick="document.getElementById('builder').scrollIntoView({behavior:'smooth'})" 
+                            class="px-8 py-4 border border-white/70 hover:bg-white/10 font-semibold rounded-3xl transition-colors">Talk to Our Team</button>
+                </div>
+                <div class="mt-4 text-xs text-orange-200">No credit card required for trial. Full compliance support included.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" onclick="if (event.target.id === 'loginModal') hideLoginModal()" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-6">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white w-full max-w-md rounded-3xl p-8">
+            <div class="flex justify-between">
+                <div class="font-semibold text-2xl">Welcome back</div>
+                <button onclick="hideLoginModal()" class="text-2xl leading-none text-slate-400 hover:text-slate-600">&times;</button>
+            </div>
+            
+            <div class="mt-6 space-y-4">
+                <div>
+                    <label class="text-xs font-medium text-slate-500">EMAIL OR USERNAME</label>
+                    <input type="text" value="demo@texasdrived.com" class="mt-1 w-full border border-slate-200 focus:border-orange-400 transition-colors px-4 py-3 rounded-2xl text-sm">
+                </div>
+                <div>
+                    <label class="text-xs font-medium text-slate-500">PASSWORD</label>
+                    <input type="password" value="demo123" class="mt-1 w-full border border-slate-200 focus:border-orange-400 transition-colors px-4 py-3 rounded-2xl text-sm">
+                </div>
+            </div>
+            
+            <button onclick="loginDemo()" class="mt-6 w-full py-3.5 bg-slate-900 text-white rounded-2xl font-semibold">Sign In to Dashboard</button>
+            
+            <div class="text-center mt-4 text-xs text-slate-500">Demo mode — any credentials work</div>
+        </div>
+    </div>
+
+    <script>
+        function tailwindInit() {
+            document.documentElement.style.setProperty('--accent', '#f97316');
+        }
+        
+        function startFreeTrial() {
+            const btns = event.currentTarget;
+            alert("Thank you! In a real implementation, this would open a signup flow with school/business details or student enrollment.\n\nFor now, we've created a full project foundation in /artifacts/texas-drivers-ed/. Let's continue building the real platform together.");
+            // In real app: redirect to /signup or open modal with form
+        }
+        
+        function enrollNow(type = 'teen') {
+            const msg = type === 'teen' 
+                ? "Enrolling in Texas Teen Driver Ed (32hr). This would create a student account, charge (or trial), and redirect to Module 1 dashboard."
+                : "Enrolling in Adult 6-Hour course. Fast path to ADE-1317 certificate.";
+            alert(msg + "\n\nNext step in development: Connect to Supabase auth + Stripe checkout.");
+        }
+        
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginModal').classList.add('flex');
+        }
+        
+        function hideLoginModal() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+        
+        function loginDemo() {
+            hideLoginModal();
+            alert("Logged in successfully (demo).\n\nYou would now see the Student Dashboard with progress, current lesson, certificate status, and parent view toggle.");
+            // Future: window.location = '/dashboard'
+        }
+        
+        function simulateVideoPlay(element) {
+            element.innerHTML = `
+                <div class="text-white text-center p-8">
+                    <i class="fa-solid fa-pause text-5xl mb-4"></i>
+                    <div class="font-medium">Demo video playing...</div>
+                    <div class="text-xs mt-2 opacity-75">In production: Mux or self-hosted HLS with watch-time tracking API calls</div>
+                    <button onclick="event.target.closest('.demo-video-placeholder').innerHTML = '<div class=\'text-center text-white p-8\'><i class=\'fa-solid fa-play text-6xl mb-3 opacity-90\'></i><div class=\'text-sm font-medium tracking-wider\'>CLICK TO PLAY DEMO LESSON</div></div>'; event.stopImmediatePropagation();" 
+                            class="mt-4 text-xs px-4 py-1.5 bg-white/20 hover:bg-white/30 rounded-full">Stop Demo</button>
+                </div>
+            `;
+            
+            // Simulate progress
+            setTimeout(() => {
+                const progressBars = document.querySelectorAll('.progress-bar');
+                if (progressBars.length > 0) {
+                    progressBars[0].style.width = '67%';
+                }
+            }, 1800);
+        }
+        
+        function completeLessonDemo() {
+            alert("Lesson marked complete! \n\nIn the real platform: This updates the database, unlocks the next lesson, logs exact time spent, and checks against minimum required time for compliance.");
+        }
+        
+        function takeQuizDemo() {
+            const quizHTML = `
+                <div class="fixed inset-0 bg-black/70 z-[200] flex items-center justify-center p-4" onclick="this.remove()">
+                    <div onclick="event.stopImmediatePropagation()" class="bg-white max-w-lg w-full rounded-3xl p-8">
+                        <div class="font-semibold text-xl">Knowledge Check — Right-of-Way</div>
+                        <div class="text-sm text-slate-500 mt-1">Module 1 • 4 questions</div>
+                        
+                        <div class="mt-6 space-y-5 text-sm">
+                            <div>
+                                <div class="font-medium">1. At a 4-way stop, who goes first?</div>
+                                <div class="mt-2 space-y-1.5 text-xs">
+                                    <div class="flex items-center gap-x-2 p-2.5 border rounded-2xl"><input type="radio" name="q1" class="accent-orange-500"> <span>The vehicle that arrived first</span></div>
+                                    <div class="flex items-center gap-x-2 p-2.5 border rounded-2xl"><input type="radio" name="q1" class="accent-orange-500"> <span>The vehicle on the right</span></div>
+                                    <div class="flex items-center gap-x-2 p-2.5 border rounded-2xl"><input type="radio" name="q1" class="accent-orange-500"> <span>Always yield to the left</span></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div class="font-medium">2. In a work zone, fines are typically:</div>
+                                <div class="mt-2 space-y-1.5 text-xs">
+                                    <div class="flex items-center gap-x-2 p-2.5 border rounded-2xl"><input type="radio" name="q2" class="accent-orange-500"> <span>The same as normal</span></div>
+                                    <div class="flex items-center gap-x-2 p-2.5 border rounded-2xl"><input type="radio" name="q2" class="accent-orange-500"> <span>Doubled or increased</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 flex gap-x-3">
+                            <button onclick="this.closest('.fixed').remove(); alert('Quiz submitted! In production this would grade instantly, require 80% to pass, and log for compliance.');" 
+                                    class="flex-1 py-3 bg-emerald-600 text-white rounded-2xl font-semibold text-sm">Submit Answers</button>
+                            <button onclick="this.closest('.fixed').remove()" class="flex-1 py-3 border rounded-2xl font-semibold text-sm">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', quizHTML);
+        }
+        
+        function showBuilderModal() {
+            alert("Course Builder Demo requested.\n\nThis would open a modal or page showing the no-code/low-code interface for adding lessons, setting time requirements, creating quizzes mapped to POI-DE objectives, previewing student view, and managing branding for white-label schools.\n\nWe can build this next using React components + Supabase backend.");
+        }
+        
+        // Keyboard escape for modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const modals = document.querySelectorAll('.fixed.inset-0');
+                if (modals.length > 0) modals[modals.length-1].remove();
+                else {
+                    const login = document.getElementById('loginModal');
+                    if (!login.classList.contains('hidden')) hideLoginModal();
+                }
+            }
+        });
+        
+        // Boot
+        window.onload = function() {
+            tailwindInit();
+            console.log('%c[Texas DriveEd] Prototype loaded. Project files ready in /artifacts/texas-drivers-ed/', 'color:#64748b');
+        }
+        
+        // Bonus: Make some elements more interactive
+        console.log('%c[Prototype] Ready for iteration. Ask me to expand any section (e.g. full dashboard HTML, Supabase schema, or PDF certificate generator).', 'color:#94a3b8');
+    </script>
+</body>
+</html>
