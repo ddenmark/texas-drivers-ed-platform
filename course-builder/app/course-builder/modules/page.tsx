@@ -60,7 +60,7 @@ export default function POIDEModuleEditor() {
 
   const selectModule = (module: Module) => {
     setSelectedModule(module);
-    setFullContent(null); // Clear previously loaded content when switching modules
+    setFullContent(null);
   };
 
   const resetToDefaults = () => {
