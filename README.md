@@ -1,58 +1,60 @@
-# Texas Driver's Ed Training Course Builder & Website Service - Project Starter
+# Module 8: Alcohol and Drugs
+**Target Duration:** 3.0 hours (180 minutes)  
+**Position:** Module 8 of 12  
+**Statutory Topics Covered:** Alcohol Awareness Information, Drug and Alcohol Driving Awareness Programs
 
-**Goal:** Build a compliant, TDLR-approved online driver's education platform and course builder service, starting with Texas. Courses must be 100% legal for real driver training and licensing (issuing valid DE-964 / ADE-1317 certificates).
+## Learning Objectives
+By the end of this module, students will be able to:
+- Explain how alcohol and drugs impair driving ability
+- Understand Texas zero-tolerance laws for minors
+- Recognize the legal, financial, and personal consequences of impaired driving
+- Apply refusal skills and make safe decisions regarding substances
 
-**Important Legal Note:** 
-- Only TDLR-approved Driver Education providers can issue valid certificates for licensing purposes.
-- The curriculum must align with the official **Program of Organized Instruction in Driver Education and Traffic Safety (POI-DE)** (latest edition adopted by reference in 16 TAC §84.3).
-- This project requires becoming or partnering with a TDLR-approved provider. Content alone does not make it legal.
-- New 2026+ requirement: Include construction/work zone driving safety information.
+## Lesson Breakdown
 
-**Project Phases:**
-1. Research & Compliance Setup (Current)
-2. Business Formation & TDLR Application Preparation
-3. Curriculum Development (aligned to POI-DE)
-4. Platform MVP (Website + Interactive Course Demo)
-5. Full Student Portal + Certificate System + Reporting
-6. Course Builder Tools (for internal use or SaaS to other schools)
-7. Launch, Marketing, Scaling
+### Lesson 8.1: How Alcohol Affects Driving (35 min)
+- BAC and impairment levels
+- Reaction time, vision, and judgment effects
+- **Interactive:** BAC estimator activity
 
-**Current Status (May 25, 2026):** 
-- Full compliance documentation and statutory mapping complete
-- All 12 POI-DE modules have detailed instructional content
-- Supporting materials generated (Student Handbook, Parent-PTDE Guide, Course Syllabus, DPS Next Steps Guide)
-- Production Next.js Course Builder initialized (`/course-builder/`)
-- Required Topics Dashboard (all 15 statutory topics) live and interactive
-- POI-DE Module Editor with drag-and-drop reordering + time allocation implemented
+### Lesson 8.2: Texas Alcohol Laws for Drivers (30 min)
+- **Statutory Requirement:** Alcohol Awareness Information
+- Zero tolerance for minors (any detectable amount)
+- Open Container law
+- DUI/DWI penalties and consequences
 
-**Key Resources:**
-- TDLR Driver Education: https://www.tdlr.texas.gov/driver/education/
-- DPS Learner License Teen: https://www.dps.texas.gov/section/driver-license/texas-learners-license-teen
-- POI-DE: Obtain latest from TDLR (adopted by reference; providers get access).
-- PTDE Program Guide: Parents purchase from TDLR for BTW portion.
+### Lesson 8.3: Drugs and Driving (30 min)
+- **Statutory Requirement:** Drug and Alcohol Driving Awareness Programs
+- Common impairing drugs (prescription, over-the-counter, illegal)
+- How drugs affect driving differently than alcohol
+- Synergistic effects when combined with alcohol
 
-**Next Immediate Steps:**
-- User: Form Texas LLC if needed and begin TDLR provider application process.
-- We (Grok): Integrate module content into the Next.js Course Builder, expand quiz banks, and prepare PDF versions of supporting materials.
+### Lesson 8.4: Consequences & Real Stories (25 min)
+- Legal consequences (license loss, jail, fines)
+- Financial impact (insurance, legal fees)
+- Personal and family impact
+- Stories from victims and offenders (age-appropriate)
 
-**Tech Stack Recommendation (MVP to Production):**
-- **Frontend:** Next.js 15 (App Router), TypeScript, Tailwind CSS, shadcn/ui components.
-- **Backend/Auth/DB:** Supabase (PostgreSQL, Auth, Storage, Edge Functions) for rapid compliant MVP. Or Firebase.
-- **Video/Content:** Mux.com or Bunny.net for streaming + analytics (watch time tracking).
-- **Quizzes/Interactive:** Custom React components + state management (Zustand or React Query).
-- **Certificates:** jsPDF or @react-pdf/renderer + unique control numbers + QR verification.
-- **Payments:** Stripe (subscriptions + one-time course purchases).
-- **Admin/Course Builder:** Custom dashboard with rich text editor (TipTap), quiz builder, preview mode.
-- **Hosting:** Vercel (frontend) + Supabase.
-- **Compliance Extras:** Audit logging, role-based access (Student, Parent, Admin, School), data export for TDLR uploads.
+### Lesson 8.5: Refusal Skills & Making Good Decisions (30 min)
+- Peer pressure resistance techniques
+- Designated driver planning
+- Rideshare and alternative transportation options
+- Personal commitment exercise
 
-**Folder Structure:**
-- /docs/ - Business plan, compliance checklist, curriculum details, TDLR application support package.
-- /prototype/ - HTML starter for marketing site + course demo.
-- /course-builder/ - **Production Next.js app** for the full Course Builder (Required Topics Dashboard, POI-DE Module Editor, etc.).
-- /content/
-  - /modules/ - Detailed instructional content for all 12 POI-DE modules
-  - /supporting-materials/ - Student Handbook, Parent Guide, Course Syllabus, DPS Next Steps
-- /legal/ - TDLR rules summaries, templates.
+### Lesson 8.6: Module Assessment (30 min)
+- Comprehensive quiz on laws, effects, and decision-making
 
-Start here. Let's build this step by step to make it real and legal.
+## Key Teaching Points (Texas-Specific)
+- Texas has some of the strictest minor DUI laws in the country
+- Even one drink can put a teen over the legal limit
+- Prescription drugs can be just as impairing as illegal drugs
+
+## Sample Assessment Items
+1. What is Texas’ zero tolerance policy for minors?
+2. How does alcohol affect reaction time?
+3. Name three strategies for refusing alcohol or drugs.
+
+## Statutory Integration
+Heavy emphasis on both Alcohol Awareness and Drug & Alcohol Driving Awareness Programs as mandatory sections.
+
+**Status:** Content started. This is one of the most critical modules for safety outcomes.
