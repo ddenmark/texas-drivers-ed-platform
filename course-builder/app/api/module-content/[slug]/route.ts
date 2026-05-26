@@ -8,19 +8,8 @@ export async function GET(
 ) {
   const { slug } = await params;
   
-  // Robust path resolution
-  const possiblePaths = [
-    path.join(process.cwd(), 'content', 'modules'),
-    path.join(process.cwd(), '..', 'content', 'modules'),
-  ];
-
-  let contentDir = possiblePaths[0];
-  for (const p of possiblePaths) {
-    if (fs.existsSync(p)) {
-      contentDir = p;
-      break;
-    }
-  }
+  // Content is self-contained inside course-builder/content/modules/
+  const contentDir = path.join(process.cwd(), 'content', 'modules');
 
   const filePath = path.join(contentDir, `${slug}.md`);
 

@@ -9,19 +9,8 @@ export interface ModuleContent {
   statutoryTopics?: string[];
 }
 
-// Robust path resolution for different environments
-const possiblePaths = [
-  path.join(process.cwd(), 'content', 'modules'),           // content inside course-builder
-  path.join(process.cwd(), '..', 'content', 'modules'),     // when running from course-builder/
-];
-
-let contentDir = possiblePaths[0];
-for (const p of possiblePaths) {
-  if (fs.existsSync(p)) {
-    contentDir = p;
-    break;
-  }
-}
+// Content is now self-contained inside course-builder/content/modules/
+const contentDir = path.join(process.cwd(), 'content', 'modules');
 
 export function getAllModuleContents(): ModuleContent[] {
   if (!fs.existsSync(contentDir)) {
