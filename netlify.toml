@@ -1,0 +1,19 @@
+[build]
+  # The directory where your Next.js app lives
+  base = "course-builder"
+
+  # Build command
+  command = "npm run build"
+
+  # Directory to publish (Next.js output)
+  publish = ".next"
+
+[build.environment]
+  # Use a recent stable Node.js version
+  NODE_VERSION = "20"
+
+# Optional: Redirects and headers can be added here later if needed
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
