@@ -13,25 +13,31 @@ export default function CourseBuilderHome() {
         <h1 className="text-6xl font-semibold tracking-tighter mb-4">Course Builder</h1>
         <p className="text-2xl text-slate-400 mb-8">Texas DriveEd • TDLR-Compliant Platform</p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center flex-wrap">
           <Link 
             href="/course-builder" 
-            className="px-8 py-4 bg-white text-slate-900 rounded-3xl font-semibold text-lg hover:bg-orange-50 transition-colors flex items-center justify-center gap-3"
+            className="px-6 py-3.5 bg-white text-slate-900 rounded-3xl font-semibold text-base hover:bg-orange-50 transition-colors flex items-center justify-center gap-2"
           >
-            Required Topics Dashboard →
+            Required Topics Dashboard
           </Link>
           
           <Link 
             href="/course-builder/modules" 
-            className="px-8 py-4 border border-white/70 hover:bg-white/10 rounded-3xl font-semibold text-lg transition-colors flex items-center justify-center gap-3"
+            className="px-6 py-3.5 border border-white/70 hover:bg-white/10 rounded-3xl font-semibold text-base transition-colors flex items-center justify-center gap-2"
           >
-            POI-DE Module Editor →
+            POI-DE Module Editor
           </Link>
+
+          <a 
+            href="/prototype/index.html" 
+            className="px-6 py-3.5 border border-white/70 hover:bg-white/10 rounded-3xl font-semibold text-base transition-colors flex items-center justify-center gap-2"
+          >
+            View Old Prototype
+          </a>
         </div>
         
-        <p className="mt-8 text-sm text-slate-500 max-w-md mx-auto">
-          Production Next.js implementation. The Required Topics dashboard enforces all 15 statutory mandates 
-          from Texas Education Code Chapter 1001 §§102–1101 with full audit logging.
+        <p className="mt-8 text-sm text-slate-400 max-w-md mx-auto">
+          Self-contained TDLR-compliant Course Builder with dynamic content loading from approved curriculum files.
         </p>
       </div>
     </div>
