@@ -21,7 +21,7 @@
 
 body {
   background: var(--background);
-  color: #111827; /* Strong dark text for readability */
+  color: #111827;
   font-family: var(--font-geist-sans);
   font-feature-settings: "kern", "tnum", "ss01";
   -webkit-font-smoothing: antialiased;
