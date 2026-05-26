@@ -41,7 +41,7 @@ export default function RequiredTopicsDashboard() {
 
   const getStatusColor = (status: Status) => {
     switch (status) {
-      case 'Completed': return 'bg-emerald-500 text-white';
+      case 'Completed': return 'bg-emerald-600 text-white';
       case 'In Progress': return 'bg-amber-500 text-white';
       default: return 'bg-slate-200 text-slate-700';
     }
@@ -101,15 +101,15 @@ export default function RequiredTopicsDashboard() {
         </div>
 
         {/* Progress Overview */}
-        <div className="bg-white border border-slate-200 rounded-3xl p-6 mb-8">
+        <div className="bg-white rounded-3xl p-6 mb-8 border">
           <div className="flex justify-between items-center mb-4">
             <div>
               <h2 className="font-semibold text-xl">Statutory Required Topics Compliance</h2>
-              <p className="text-sm text-slate-500">Texas Education Code Chapter 1001 §§102–1101 • 15 Mandatory Topics</p>
+              <p className="text-sm text-slate-600">Texas Education Code Chapter 1001 §§102–1101 • 15 Mandatory Topics</p>
             </div>
             <div className="text-right">
-              <div className="font-mono text-4xl font-semibold text-emerald-600">{completedCount}<span className="text-2xl text-slate-400">/{topics.length}</span></div>
-              <div className="text-xs text-slate-500">Topics Completed</div>
+              <div className="font-mono text-4xl font-semibold text-emerald-600">{completedCount}<span className="text-2xl text-slate-600">/{topics.length}</span></div>
+              <div className="text-xs text-slate-600">Topics Completed</div>
             </div>
           </div>
           
@@ -119,7 +119,7 @@ export default function RequiredTopicsDashboard() {
               style={{ width: `${progressPercentage}%` }}
             />
           </div>
-          <div className="flex justify-between text-xs text-slate-500 mt-1.5">
+          <div className="flex justify-between text-xs text-slate-600 mt-1.5">
             <div>0%</div>
             <div>100% TDLR Ready</div>
           </div>
@@ -163,9 +163,9 @@ export default function RequiredTopicsDashboard() {
                     <div className="font-semibold text-lg leading-tight mb-1">{topic.name}</div>
                     <div className="text-sm text-orange-600 font-medium">{topic.primaryModule}</div>
                   </div>
-                  <div className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap ${getStatusColor(topic.status)}`}>
-                    {topic.status
-}                  </div>
+                  <div className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${getStatusColor(topic.status)}`}>
+                    {topic.status}
+                  </div>
                 </div>
 
                 <div className="text-sm text-slate-600 mb-4 line-clamp-2">
