@@ -225,7 +225,7 @@ export default function POIDEModuleEditor() {
 
                 {/* Statutory Topics Linked */}
                 {selectedModule.statutoryTopics.length > 0 && (
-                  <div>
+                  <div className="mb-6">
                     <div className="text-sm font-medium mb-3">Linked Statutory Requirements</div>
                     <div className="flex flex-wrap gap-2">
                       {selectedModule.statutoryTopics.map((topic, idx) => (
@@ -239,8 +239,33 @@ export default function POIDEModuleEditor() {
                         </div>
                       ))}
                     </div>
+                  </div>
+                )}
+
+                {/* Integrated Lesson Content */}
+                {selectedModule.lessons && selectedModule.lessons.length > 0 && (
+                  <div>
+                    <div className="text-sm font-medium mb-3 flex items-center gap-2">
+                      Lesson Breakdown 
+                      <span className="text-[10px] px-2 py-0.5 bg-orange-100 text-orange-700 rounded-full font-medium">INTEGRATED FROM CURRICULUM</span>
+                    </div>
+                    <div className="space-y-3 max-h-[420px] overflow-auto pr-2">
+                      {selectedModule.lessons.map((lesson, index) => (
+                        <div key={index} className="border border-slate-200 rounded-2xl p-4 bg-slate-50">
+                          <div className="flex justify-between items-start mb-2">
+                            <div className="font-medium text-slate-900">{lesson.title}</div>
+                            <div className="text-xs font-mono text-slate-500 bg-white px-2 py-0.5 rounded border">{lesson.duration}</div>
+                          </div>
+                          <ul className="text-sm text-slate-600 space-y-1 pl-4">
+                            {lesson.keyPoints.map((point, i) => (
+                              <li key={i} className="list-disc marker:text-orange-400">{point}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
                     <p className="text-xs text-slate-500 mt-3">
-                      These topics are automatically enforced as completion gates in the student experience.
+                      Lesson content is integrated from our approved POI-DE curriculum library.
                     </p>
                   </div>
                 )}

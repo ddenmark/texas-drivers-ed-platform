@@ -1,9 +1,16 @@
+export interface Lesson {
+  title: string;
+  duration: string;
+  keyPoints: string[];
+}
+
 export interface Module {
   id: number;
   name: string;
   description: string;
   timeMinutes: number;
   statutoryTopics: string[];
+  lessons?: Lesson[];
 }
 
 export const initialModules: Module[] = [
@@ -12,7 +19,16 @@ export const initialModules: Module[] = [
     name: "Traffic Laws",
     description: "Texas licensing process, GDL, signs, signals, right-of-way, and basic traffic laws. Includes Traffic Stops statutory topic.",
     timeMinutes: 360,
-    statutoryTopics: ["Traffic Stops"]
+    statutoryTopics: ["Traffic Stops"],
+    lessons: [
+      { title: "Welcome & Texas Licensing Pathways", duration: "25 min", keyPoints: ["GDL system explained", "Learner Permit → Provisional → Full License", "Parent/Guardian role in PTDE"] },
+      { title: "Texas Driver Handbook – Signs & Signals", duration: "45 min", keyPoints: ["Regulatory, warning, and guide signs", "Traffic signals and pavement markings", "School zones and construction zones"] },
+      { title: "Right-of-Way Rules", duration: "40 min", keyPoints: ["4-way stops and uncontrolled intersections", "Yield signs and merging", "Emergency vehicles and school buses"] },
+      { title: "Core Traffic Laws & Speed Management", duration: "35 min", keyPoints: ["Basic speed laws", "Following distance (3-second rule)", "Lane usage and passing basics"] },
+      { title: "Consequences of Violations", duration: "20 min", keyPoints: ["Points system and suspensions", "Impact on insurance", "How violations affect teens"] },
+      { title: "Traffic Stops – What to Expect", duration: "25 min", keyPoints: ["Statutory: Traffic Stops topic", "What to do during a stop", "Rights and responsibilities"] },
+      { title: "Module 1 Review & Assessment", duration: "30 min", keyPoints: ["Comprehensive review", "Final Module 1 Assessment (20 questions)", "80% passing threshold"] }
+    ]
   },
   {
     id: 2,
@@ -31,14 +47,14 @@ export const initialModules: Module[] = [
   {
     id: 4,
     name: "Driver Readiness",
-    description: "Physical and mental fitness to drive, vision, fatigue, medications, and responsible decision-making.",
+    description: "Physical and mental fitness, vision, fatigue, medications, and responsible decision-making.",
     timeMinutes: 120,
     statutoryTopics: []
   },
   {
     id: 5,
     name: "Risk Reduction",
-    description: "Defensive driving principles, hazard recognition, space management, speed management, and street racing awareness.",
+    description: "Defensive driving principles, hazard recognition, space management, and street racing awareness.",
     timeMinutes: 150,
     statutoryTopics: ["Street Racing"]
   },
@@ -59,14 +75,22 @@ export const initialModules: Module[] = [
   {
     id: 8,
     name: "Alcohol and Drugs",
-    description: "Effects of alcohol and drugs on driving, Texas zero-tolerance laws, and refusal skills.",
+    description: "Effects of alcohol and drugs on driving, Texas laws, refusal skills, and awareness programs.",
     timeMinutes: 180,
-    statutoryTopics: ["Alcohol Awareness Information", "Drug and Alcohol Driving Awareness Programs"]
+    statutoryTopics: ["Alcohol Awareness Information", "Drug and Alcohol Driving Awareness Programs"],
+    lessons: [
+      { title: "How Alcohol Affects Driving", duration: "35 min", keyPoints: ["BAC and impairment levels", "Reaction time, vision, and judgment effects", "Interactive BAC estimator activity"] },
+      { title: "Texas Alcohol Laws for Drivers", duration: "30 min", keyPoints: ["Zero tolerance for minors (any detectable amount)", "Open Container law", "DUI/DWI penalties and consequences"] },
+      { title: "Drugs and Driving", duration: "30 min", keyPoints: ["Prescription, over-the-counter, and illegal drugs", "How drugs affect driving differently than alcohol", "Synergistic effects when combined"] },
+      { title: "Consequences & Real Stories", duration: "25 min", keyPoints: ["Legal consequences (license loss, jail, fines)", "Financial and personal/family impact", "Age-appropriate stories from victims"] },
+      { title: "Refusal Skills & Making Good Decisions", duration: "30 min", keyPoints: ["Peer pressure resistance techniques", "Designated driver planning", "Rideshare and alternative options"] },
+      { title: "Module 8 Assessment", duration: "30 min", keyPoints: ["Comprehensive quiz on laws, effects, and decision-making"] }
+    ]
   },
   {
     id: 9,
     name: "Adverse Conditions",
-    description: "Vehicle emergencies, skid recovery, hydroplaning, and post-crash procedures.",
+    description: "Vehicle emergencies, skid recovery, crash avoidance, and impact on hospitals/rehabilitation facilities.",
     timeMinutes: 120,
     statutoryTopics: ["Hospital and Rehabilitation Facilities"]
   },
