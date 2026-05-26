@@ -17,7 +17,13 @@
 6. Course Builder Tools (for internal use or SaaS to other schools)
 7. Launch, Marketing, Scaling
 
-**Current Status (May 25, 2026):** Initial research complete. Requirements documented. Sample compliant module structure outlined. Basic project files created.
+**Current Status (May 25, 2026):** 
+- Full compliance documentation and statutory mapping complete
+- All 12 POI-DE modules have detailed instructional content
+- Supporting materials generated (Student Handbook, Parent-PTDE Guide, Course Syllabus, DPS Next Steps Guide)
+- Production Next.js Course Builder initialized (`/course-builder/`)
+- Required Topics Dashboard (all 15 statutory topics) live and interactive
+- POI-DE Module Editor with drag-and-drop reordering + time allocation implemented
 
 **Key Resources:**
 - TDLR Driver Education: https://www.tdlr.texas.gov/driver/education/
@@ -26,8 +32,8 @@
 - PTDE Program Guide: Parents purchase from TDLR for BTW portion.
 
 **Next Immediate Steps:**
-- User: Form Texas LLC if needed, research TDLR application process in detail (visit TDLR site or call).
-- We (Grok): Refine curriculum outline, create more prototype pages, help draft application materials or business plan sections.
+- User: Form Texas LLC if needed and begin TDLR provider application process.
+- We (Grok): Integrate module content into the Next.js Course Builder, expand quiz banks, and prepare PDF versions of supporting materials.
 
 **Tech Stack Recommendation (MVP to Production):**
 - **Frontend:** Next.js 15 (App Router), TypeScript, Tailwind CSS, shadcn/ui components.
@@ -41,9 +47,12 @@
 - **Compliance Extras:** Audit logging, role-based access (Student, Parent, Admin, School), data export for TDLR uploads.
 
 **Folder Structure:**
-- /docs/ - Business plan, compliance checklist, curriculum details.
-- /prototype/ - HTML/Next.js starter for marketing site + course demo.
-- /content/ - Lesson outlines, scripts, assets plan.
+- /docs/ - Business plan, compliance checklist, curriculum details, TDLR application support package.
+- /prototype/ - HTML starter for marketing site + course demo.
+- /course-builder/ - **Production Next.js app** for the full Course Builder (Required Topics Dashboard, POI-DE Module Editor, etc.).
+- /content/
+  - /modules/ - Detailed instructional content for all 12 POI-DE modules
+  - /supporting-materials/ - Student Handbook, Parent Guide, Course Syllabus, DPS Next Steps
 - /legal/ - TDLR rules summaries, templates.
 
 Start here. Let's build this step by step to make it real and legal.
