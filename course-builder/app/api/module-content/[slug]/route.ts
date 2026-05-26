@@ -8,7 +8,20 @@ export async function GET(
 ) {
   const { slug } = await params;
   
-  const contentDir = path.join(process.cwd(), '..', 'content', 'modules');
+  // Robust path resolution
+  const possiblePaths = [
+    path.join(process.cwd(), 'content', 'modules'),
+    path.join(process.cwd(), '..', 'content', 'modules'),
+  ];
+
+  let contentDir = possiblePaths[0];
+  for (const p of possiblePaths) {
+    if (fs.existsSync(p)) {
+      contentDir = p;
+      break;
+    }
+  }
+
   const filePath = path.join(contentDir, `${slug}.md`);
 
   if (!fs.existsSync(filePath)) {
