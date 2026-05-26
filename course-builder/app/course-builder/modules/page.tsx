@@ -7,6 +7,8 @@ export default function POIDEModuleEditor() {
   const [modules, setModules] = useState<Module[]>(initialModules);
   const [selectedModule, setSelectedModule] = useState<Module | null>(modules[0]);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [fullContent, setFullContent] = useState<string | null>(null);
+  const [isLoadingContent, setIsLoadingContent] = useState(false);
 
   const totalMinutes = modules.reduce((sum, mod) => sum + mod.timeMinutes, 0);
   const totalHours = (totalMinutes / 60).toFixed(1);
@@ -58,11 +60,13 @@ export default function POIDEModuleEditor() {
 
   const selectModule = (module: Module) => {
     setSelectedModule(module);
+    setFullContent(null); // Clear previously loaded content when switching modules
   };
 
   const resetToDefaults = () => {
     setModules(initialModules);
     setSelectedModule(initialModules[0]);
+    setFullContent(null);
   };
 
   return (
@@ -271,22 +275,51 @@ export default function POIDEModuleEditor() {
                 <div>
                   <button
                     onClick={async () => {
+                      if (!selectedModule) return;
+                      
+                      setIsLoadingContent(true);
+                      setFullContent(null);
+
                       try {
-                        const res = await fetch(`/api/module-content/${selectedModule.id.toString().padStart(2, '0')}-${selectedModule.name.toLowerCase().replace(/\s+/g, '-')}`);
+                        const slug = `${selectedModule.id.toString().padStart(2, '0')}-${selectedModule.name.toLowerCase().replace(/\s+/g, '-')}`;
+                        const res = await fetch(`/api/module-content/${slug}`);
+                        
                         if (res.ok) {
                           const data = await res.json();
-                          alert("Full curriculum content loaded! (In production this would open a rich viewer)\n\n" + data.content.substring(0, 500) + "...");
+                          setFullContent(data.content);
                         } else {
-                          alert("Full content available in content/modules/ folder. Dynamic loading ready.");
+                          setFullContent("Full curriculum content is available in course-builder/content/modules/. Dynamic loading is ready.");
                         }
                       } catch (error) {
-                        alert("Dynamic content loading is configured. Full Markdown files are in /content/modules/");
+                        setFullContent("Could not load content. Make sure the Markdown files exist in course-builder/content/modules/.");
+                      } finally {
+                        setIsLoadingContent(false);
                       }
                     }}
-                    className="w-full py-3 border border-orange-300 text-orange-700 rounded-2xl text-sm font-semibold hover:bg-orange-50 transition-colors"
+                    disabled={isLoadingContent}
+                    className="w-full py-3 border border-orange-300 text-orange-700 rounded-2xl text-sm font-semibold hover:bg-orange-50 transition-colors disabled:opacity-50"
                   >
-                    Load Full Curriculum Content from Markdown Files →
+                    {isLoadingContent ? "Loading Content..." : "Load Full Curriculum Content from Markdown Files →"}
                   </button>
+
+                  {/* Display loaded content */}
+                  {fullContent && (
+                    <div className="mt-4 border border-slate-200 rounded-2xl p-4 bg-slate-50 max-h-[400px] overflow-auto">
+                      <div className="flex justify-between items-center mb-3">
+                        <div className="text-sm font-semibold text-slate-700">Full Curriculum Content</div>
+                        <button 
+                          onClick={() => setFullContent(null)}
+                          className="text-xs text-slate-500 hover:text-slate-700"
+                        >
+                          Close
+                        </button>
+                      </div>
+                      <pre className="text-xs text-slate-700 whitespace-pre-wrap font-mono leading-relaxed">
+                        {fullContent}
+                      </pre>
+                    </div>
+                  )}
+
                   <p className="text-xs text-center text-slate-500 mt-2">
                     Dynamically loads detailed lesson content from the approved curriculum library
                   </p>
